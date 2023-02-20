@@ -1,0 +1,56 @@
+<%- include("./partials/header") %>
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid" style="
+    padding-top: 15px;
+    padding-left: 135px;">
+        <a class="navbar-brand" href="/">Create To Do</a>
+    </div>
+</nav>
+<div class="container mt-5">
+    <form action="/add/todo" method="POST" class="d-flex">
+        <input type="text" name="todo" class="form-control" placeholder=" Enter To Do">
+        <input type="submit" value="Add ToDo" class="btn btn-lg btn-md btn-primary">
+    </form>
+
+
+    <ul class="list-group my-5">
+        <% todo.forEach(todos => { %>
+            <li class="list-group-item " aria-current="true">
+    <span style="
+    display: inline-block;
+    width: 900px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;"><%= todos.todo %></span>
+                <div style="float: right">
+                    <a class="todo-delete <%= todos.id %>">Delete</a>
+                    <a class="todo-edit <%= todos.id %>">Edit</a>
+                </div>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+
+<script>
+    const deleteButton = document.querySelectorAll(".todo-delete");
+    deleteButton.forEach((button) => {
+        button.addEventListener("click", () => {
+            const endpoint = `/${button.classList[1]}`
+            fetch(endpoint, {
+                method: "DELETE"
+            })
+            window.location.href = "/";
+
+        })
+    })
+
+    const editButton = document.querySelectorAll(".todo-edit");
+    editButton.forEach((button) => {
+        button.addEventListener("click", () => {
+            const id = `/${button.classList[1]}`
+            window.location.href = "/edit" + id;
+        })
+    })
+</script>
+
+<%- include("./partials/footer") %>

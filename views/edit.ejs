@@ -1,0 +1,18 @@
+<%- include("./partials/header") %>
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid" style="
+    padding-top: 15px;
+    padding-left: 135px;">
+        <a class="navbar-brand" href="/">Edit To Do</a>
+    </div>
+</nav>
+<div class="container mt-5">
+    <form action="/edit/:id" method="POST" class="d-flex">
+        <input type="text" name="todo" class="form-control" placeholder="Edit To Do" value="<%= todo.todo %>">
+        <input type="text" name="_id" class="form-control" placeholder="Edit To Do" value="<%= todo._id %>" hidden="">
+        <input type="submit" value="Edit ToDo" class="btn btn-lg btn-md btn-primary">
+    </form>
+
+</div>
+
+<%- include("./partials/footer") %>
